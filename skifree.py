@@ -159,7 +159,7 @@ def main():
                 for row in scores_rows:
                     scores_table.append(row.split(":"))
                 for i in range(len(scores_table)):
-                    high_player = "{:.<100}".format(scores_table[i][0])
+                    high_player = "{}. {:.<100}".format(i + 1, scores_table[i][0])
                     high_score = "{}  ".format(scores_table[i][1])
                     high_player_surf = font.render(high_player, 1, (0, 0, 0))
                     high_score_surf = font.render(high_score, 1, (0, 0, 0), (255, 255, 255))
