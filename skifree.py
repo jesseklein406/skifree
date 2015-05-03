@@ -150,17 +150,17 @@ def main():
                 pygame.time.delay(1000)
                 screen.fill([255, 255, 255])
                 game_over = font.render("Game Over!", 1, (0, 0, 0))
-                params = urllib.urlencode(dict(player=player, score=points))
-                req = urllib2.Request(url="http://www.thefirstmimzy.com/skifree.php", data=params)
+                data = urllib.urlencode(dict(player=player, score=points))
+                req = urllib2.Request(url="http://www.thefirstmimzy.com/skifree.php", data=data)
                 f = urllib2.urlopen(req)
                 scores_page = f.read()
-                scores_rows = scores_page.strip("<br>").split("<br><br>")
+                scores_rows = scores_page.strip(",").split(",")
                 scores_table = []
                 for row in scores_rows:
-                    scores_table.append(row.split("<br>"))
+                    scores_table.append(row.split(":"))
                 for i in range(len(scores_table)):
-                    high_player = "{:.<100}".format(scores_table[i][0][7:])
-                    high_score = "{}  ".format(scores_table[i][1][6:])
+                    high_player = "{:.<100}".format(scores_table[i][0])
+                    high_score = "{}  ".format(scores_table[i][1])
                     high_player_surf = font.render(high_player, 1, (0, 0, 0))
                     high_score_surf = font.render(high_score, 1, (0, 0, 0), (255, 255, 255))
                     screen.blit(high_player_surf, [20, 250 + 50 * i])
